@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/*
+ * Neo-brutalist: cream paper, black ink, 3px rules, hard offset shadows and
+ * one flat, saturated colour per kind of network.
+ */
+@theme inline {
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@theme {
+  --color-paper: #fff8e7;
+  --color-ink: #0a0a0a;
+  --color-residential: #7ee787;
+  --color-mobile: #6cc4ff;
+  --color-business: #ffd23f;
+  --color-education: #c4a7ff;
+  --color-government: #ffa45c;
+  --color-datacenter: #ff6b8b;
+  --color-isp: #e7e1d3;
+  --color-unknown: #ffffff;
+  --shadow-hard: 6px 6px 0 0 #0a0a0a;
+  --shadow-hard-sm: 3px 3px 0 0 #0a0a0a;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Base resets belong in @layer base. An unlayered `a { color }` or
+ * `button { font }` outranks every Tailwind utility and silently kills text
+ * colours on links and font sizes on controls.
+ */
+@layer base {
+  a {
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: var(--color-business);
+    color: var(--color-ink);
+  }
+}
+
+/* "Nothing on record": diagonal hatching instead of a colour. */
+.hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(10, 10, 10, 0.09) 0 2px,
+    transparent 2px 9px
+  );
+}
+
+/* A pressed-in button: the shadow collapses as it moves into it. */
+.press {
+  transition:
+    transform 80ms ease,
+    box-shadow 80ms ease;
+}
+
+.press:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+}
+
+.press:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 0 var(--color-ink);
+}
